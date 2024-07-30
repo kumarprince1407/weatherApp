@@ -5,6 +5,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* background-color: rgb(204, 232, 255); */
+  background-image: url("../src/assets/cloudImage.jpg");
+
+  background-size: cover; /* Ensure the background image covers the entire body */
+  background-repeat: no-repeat; /* Prevent the background image from repeating */
+  background-position: center center; /* Center the background image */
 }
 
 code {

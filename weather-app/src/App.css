@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "MemphisRiver";
+  src: url(assets/fonts/MemphisRiver.ttf) format("truetype");
+}
+
 .App {
   text-align: center;
 }
@@ -5,6 +10,11 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.app_header {
+  font-family: "MemphisRiver", sans-serif;
+  font-size: 6em;
 }
 
 @media (prefers-reduced-motion: no-preference) {

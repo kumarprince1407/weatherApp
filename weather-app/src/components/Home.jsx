@@ -1,3 +1,4 @@
+//Home.jsx
 import React, { useState } from "react";
 import axios from "axios";
 import { useQuery } from "react-query";
@@ -6,18 +7,22 @@ import { AgGridReact } from "ag-grid-react"; // React Data Grid Component
 import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the Data Grid
 import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied to the Data Grid
 
-import { fetchData } from "../api/fetchWeatherData";
+import { fetchData, useWeatherData } from "../api/fetchWeatherData";
+import { useNavigate, useParams } from "react-router-dom";
+//change
 
 // const fetchData = () => {
 //   return axios.get("https://freetestapi.com/api/v1/weathers", {});
 // };
 
 const DetailsButton = (params) => {
-  console.log(params);
+  console.log("Params:", params);
+  const navigate = useNavigate();
 
   return (
     <button
-      onClick={() => DetailsButton(params)}
+      // onClick={() => DetailsButton(params)}
+      onClick={() => navigate(`/details/${params.data.id}`)} //Ask
       style={{
         background: "#A1D8F4",
         color: "white",
@@ -30,17 +35,22 @@ const DetailsButton = (params) => {
         alignItems: "center", //Centers the content vertically
       }}
     >
-      Click Me
+      Details
     </button>
   );
 };
 
 const Home = () => {
-  const { isLoading, data, isError, error } = useQuery(
-    "weather-data", //unique key
-    fetchData,
-    {} //additional features from React query
-  );
+  //const { id } = useParams(); //To get the id from the url
+  //const navigate = useNavigate();
+
+  // const { isLoading, data, isError, error } = useQuery(
+  //   "weather-data", //unique key
+  //   fetchData,
+  //   {} //additional features from React query
+  // );
+
+  const { isLoading, data, isError, error } = useWeatherData(); //Updated way
 
   if (isLoading) {
     return <h2>Loading...</h2>;
@@ -68,7 +78,7 @@ const Home = () => {
       cellStyle: { textAlign: "left" },
     },
     {
-      headerName: "Details",
+      headerName: "Details & Forecast",
       field: "details",
       cellRenderer: DetailsButton,
       width: 150,
@@ -77,7 +87,7 @@ const Home = () => {
 
   return (
     <>
-      <h3 className="text-center mb-2">Home</h3>
+      {/* <h1 className="text-center mb-2">Home</h1> */}
       <div className="mainContainer flex items-center justify-center min-h-screen">
         <div
           className="ag-theme-quartz"
